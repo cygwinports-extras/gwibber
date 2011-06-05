@@ -1,5 +1,0 @@
-inherit distutils
-
-
-HOMEPAGE="http://gwibber.com/"
-SRC_URI="http://launchpad.net/gwibber/2.32/${PV}/+download/${P}.tar.gz"

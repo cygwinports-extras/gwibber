@@ -1,0 +1,19 @@
+--- origsrc/gwibber-2.31.95/gwibber/microblog/util/keyring.py	2010-09-16 23:22:53.000000000 -0500
++++ src/gwibber-2.31.95/gwibber/microblog/util/keyring.py	2010-09-26 00:06:57.819618900 -0500
+@@ -1,6 +1,6 @@
+ from const import *
+ 
+-import ctypes
++import ctypes, ctypes.util
+ import gnomekeyring
+ import exceptions
+ 
+@@ -17,7 +17,7 @@ def get_secret(id):
+ 
+   return value
+ 
+-libc = ctypes.CDLL("libc.so.6")
++libc = ctypes.CDLL(ctypes.util.find_library("c"))
+ 
+ def mlock(var):
+     libc.mlock(var, len(var))
