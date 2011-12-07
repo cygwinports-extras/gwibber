@@ -1,0 +1,30 @@
+G-I typelibs don't do any good without a shared-library attribute.
+
+--- origsrc/gwibber-3.2.1/libgwibber/Makefile.am	2011-10-24 10:24:29.000000000 -0500
++++ src/gwibber-3.2.1/libgwibber/Makefile.am	2011-12-07 02:12:29.943790200 -0600
+@@ -74,9 +74,10 @@ gir_DATA = Gwibber-$(GWIBBER_API_VERSION
+ typelibsdir = $(libdir)/girepository-1.0
+ typelibs_DATA = $(gir_DATA:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir $(INTROSPECTION_COMPILER) libgwibber.la
+ 	LD_LIBRARY_PATH=.libs${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH} \
+ 	$(INTROSPECTION_COMPILER) \
++		--shared-library=`$(SED) -n "s/^dlname='\([A-Za-z0-9.+-]\+\)'/\1/p" libgwibber.la` \
+ 		--includedir=$(srcdir) \
+ 		--includedir=. \
+ 		$(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+--- origsrc/gwibber-3.2.1/libgwibber-gtk/Makefile.am	2011-10-24 10:24:29.000000000 -0500
++++ src/gwibber-3.2.1/libgwibber-gtk/Makefile.am	2011-12-07 02:12:22.533780000 -0600
+@@ -92,9 +92,10 @@ gir_DATA = GwibberGtk-$(GWIBBER_API_VERS
+ typelibsdir = $(libdir)/girepository-1.0
+ typelibs_DATA = $(gir_DATA:.gir=.typelib)
+ 
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
++%.typelib: %.gir $(INTROSPECTION_COMPILER) libgwibber-gtk.la
+ 	LD_LIBRARY_PATH=.libs${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH} \
+ 	$(INTROSPECTION_COMPILER) \
++		--shared-library=`$(SED) -n "s/^dlname='\([A-Za-z0-9.+-]\+\)'/\1/p" libgwibber-gtk.la` \
+ 		--includedir=$(srcdir) \
+ 		--includedir=$(top_srcdir)/libgwibber \
+ 		$(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)

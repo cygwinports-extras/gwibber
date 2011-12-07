@@ -1,0 +1,37 @@
+inherit gnome2 python
+
+DESCRIPTION="GNOME microblogging client"
+HOMEPAGE="http://gwibber.com/"
+SRC_URI="http://launchpad.net/gwibber/3.2/${PV}/+download/${P}.tar.gz"
+
+PATCH_URI="2.31.95-ctypes.patch
+           3.2.1-introspection.patch"
+
+PKG_NAMES="${PN} ${PN}-service
+           libgwibber2 libgwibber-devel libgwibber-gtk2 libgwibber-gtk-devel
+           girepository-Gwibber0.2 girepository-GwibberGtk0.2 vala-gwibber0.2"
+gwibber_CONTENTS="etc/ usr/bin/gwibber-accounts usr/bin/gwibber-poster.exe
+		usr/bin/gwibber-preferences.exe usr/bin/gwibber.exe
+		${PYTHON_SITELIB#/}/gwibber/*.py* ${PYTHON_SITELIB#/}/gwibber/lib/gtk/
+		usr/share/applications/ usr/share/doc/ usr/share/GConf/ usr/share/glib-2.0/
+		usr/share/gwibber/ui/ usr/share/icons/ usr/share/man/"
+gwibber_service_CONTENTS="usr/bin/gwibber-service ${PYTHON_SITELIB#/}/gwibber/lib/__init__.py*
+		${PYTHON_SITELIB#/}/gwibber/microblog/
+		usr/share/dbus-1/services/ usr/share/gwibber/plugins/"
+libgwibber2_CONTENTS="usr/bin/cyggwibber-2.dll"
+libgwibber_devel_CONTENTS="usr/include/libgwibber-0.2/gwibber.h
+		usr/lib/libgwibber.* usr/lib/pkgconfig/gwibber-0.2.pc"
+libgwibber_gtk2_CONTENTS="usr/bin/cyggwibber-gtk-2.dll"
+libgwibber_gtk_devel_CONTENTS="usr/include/libgwibber-0.2/gwibber-gtk.h
+		usr/lib/libgwibber-gtk.* usr/lib/pkgconfig/gwibber-gtk-0.2.pc"
+girepository_Gwibber0_2_CONTENTS="usr/*/gir*/Gwibber-0.2.*"
+girepository_GwibberGtk0_2_CONTENTS="usr/*/gir*/GwibberGtk-0.2.*"
+vala_gwibber0_2_CONTENTS="usr/share/vala/vapi/gwibber*-0.2.*"
+PKG_IGNORE="usr/share/indicators/"
+
+# there is no official gtkspell for gtk3, but some distros are shipping from hg
+# entry.c needs to be regenerated without gtkspell support in the meantime
+DIFF_EXCLUDES="*.c *.h *.gir *.vapi"
+DISTCLEANFILES="libgwibber-gtk/entry.c"
+
+CYGCONF_ARGS="--disable-spell --disable-unity VALAC=/usr/bin/valac"

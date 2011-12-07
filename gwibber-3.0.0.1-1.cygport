@@ -1,6 +1,0 @@
-inherit distutils
-
-DESCRIPTION="GNOME microblogging client"
-HOMEPAGE="http://gwibber.com/"
-SRC_URI="http://launchpad.net/gwibber/${PV[1]}.${PV[2]}/${PV[1]}.${PV[2]}/+download/${P}.tar.gz"
-PATCH_URI="2.31.95-ctypes.patch"
