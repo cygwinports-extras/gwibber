@@ -1,5 +1,5 @@
 category: Net Gnome
-requires: girepository-GLib2.0 python python-dbus python-gi python-gnomekeyring python-gobject python-gtk2.0 python-libproxy python-mx python-oauth python-pil python-pycurl python-pynotifypython-webkit python-xdg
+requires: girepository-GnomeKeyring1.0 girepository-Gtk3.0 girepository-Notify0.7 girepository-WebKit3.0 python python-dbus python-gi python-mx python-oauth python-imaging python-xdg
 external-source: gwibber
 sdesc: "Gwibber microblogging service"
 ldesc: "Gwibber is an open source microblogging client for GNOME. It 

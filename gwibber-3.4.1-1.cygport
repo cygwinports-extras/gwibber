@@ -2,7 +2,7 @@ inherit gnome2 python
 
 DESCRIPTION="GNOME microblogging client"
 HOMEPAGE="http://gwibber.com/"
-SRC_URI="http://launchpad.net/gwibber/3.2/${PV}/+download/${P}.tar.gz"
+SRC_URI="http://launchpad.net/gwibber/${PV[1]}.${PV[2]}/${PV}/+download/${P}.tar.gz"
 
 PATCH_URI="2.31.95-ctypes.patch
            3.2.1-introspection.patch"
@@ -14,7 +14,7 @@ gwibber_CONTENTS="etc/ usr/bin/gwibber-accounts usr/bin/gwibber-poster.exe
 		usr/bin/gwibber-preferences.exe usr/bin/gwibber.exe
 		${PYTHON_SITELIB#/}/gwibber/*.py* ${PYTHON_SITELIB#/}/gwibber/lib/gtk/
 		usr/share/applications/ usr/share/doc/ usr/share/GConf/ usr/share/glib-2.0/
-		usr/share/gwibber/ui/ usr/share/icons/ usr/share/man/"
+		usr/share/gwibber/ui/ usr/share/icons/ usr/share/locale/ usr/share/man/"
 gwibber_service_CONTENTS="usr/bin/gwibber-service ${PYTHON_SITELIB#/}/gwibber/lib/__init__.py*
 		${PYTHON_SITELIB#/}/gwibber/microblog/
 		usr/share/dbus-1/services/ usr/share/gwibber/plugins/"
@@ -35,3 +35,5 @@ DIFF_EXCLUDES="*.c *.h *.gir *.vapi"
 DISTCLEANFILES="libgwibber-gtk/entry.c"
 
 CYGCONF_ARGS="--disable-spell --disable-unity VALAC=/usr/bin/valac"
+
+KEEP_LA_FILES="none"
