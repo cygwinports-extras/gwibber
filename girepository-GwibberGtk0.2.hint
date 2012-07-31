@@ -1,7 +1,0 @@
-category: Gnome
-requires: libgwibber-gtk2 girepository-Dee0.5 girepository-Gtk3.0 girepository-Gwibber0.2
-external-source: gwibber
-sdesc: "Gwibber microblogging widget library (GObject Introspection)"
-ldesc: "Gwibber is an open source microblogging client for GNOME. It 
-brings the most popular social networking web services to your desktop 
-and gives you the ability to control how you communicate."
